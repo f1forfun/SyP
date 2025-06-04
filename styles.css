@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a1a, #121212);
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.serie {
+  margin-bottom: 50px;
+}
+
+.serie-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ff4b2b;
+}
+
+.capitulos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.capitulo {
+  background-color: #1f1f1f;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 180px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.capitulo img {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #333;
+  transition: transform 0.3s;
+}
+
+.capitulo span {
+  display: block;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.capitulo:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
+}
+
+.capitulo.active {
+  outline: 3px solid #ff4b2b;
+  outline-offset: 2px;
+}
