@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Catálogo de Series</title>
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="theme-color" content="#121212" />
 </head>
 <body>
   <header class="header">
@@ -19,9 +21,16 @@
 
   <footer class="footer">
     <p>© 2025 Mi Catálogo de Series.</p>
-	<p>Esta web es para uso personal, no tiene fines comerciales ni de lucro.</p>
+    <p>Esta web es para uso personal, no tiene fines comerciales ni de lucro.</p>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => console.log('SW registrado', reg))
+        .catch(err => console.error('SW error', err));
+    }
+  </script>
 </body>
 </html>
