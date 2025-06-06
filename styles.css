@@ -109,6 +109,53 @@ body {
   padding-left: 12px;
 }
 
+/* Nuevo contenedor para capítulos en lista sin imágenes */
+.capitulos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+/* Nuevo estilo para cada capítulo en lista */
+.capitulo-lista {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.capitulo-lista:hover {
+  background-color: #ff4b2b;
+  color: #121212;
+}
+
+/* Badge para capítulos vistos en lista, con ojo y más grande */
+.visto-badge-lista {
+  background-color: #2ecc71;
+  color: white;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Mantengo los capítulos con imagen originales por si los usas en otro lado */
+
 .capitulos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -125,6 +172,7 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  position: relative;
 }
 
 .capitulo:hover {
@@ -153,6 +201,37 @@ body {
   outline-offset: 2px;
 }
 
+/* Badge para capítulos con imagen (original) */
+.visto-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #2ecc71;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Estilos para capítulos marcados como "visto" */
+.capitulo.visto img {
+  filter: brightness(0.4);
+}
+
+.capitulo.visto span {
+  color: #bbb;
+  /* quitado line-through para solo perder color */
+  /* text-decoration: line-through; */
+  opacity: 0.6;
+}
+
+/* Botón volver */
 .volver-btn {
   background-color: #ff4b2b;
   border: none;

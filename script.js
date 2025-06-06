@@ -1,8 +1,7 @@
 const JSON_URL = 'https://opensheet.elk.sh/1eE89x_vzmIfMHA3X6DxTizumaK5AjDOoi3Rg63IHGXk/Hoja1';
 
 const catalogo = document.getElementById('catalogo');
-
-let temporadasList = [];  // Lista ordenada de temporadas con capítulos
+let temporadasList = [];
 
 fetch(JSON_URL)
   .then(response => response.json())
@@ -33,7 +32,8 @@ fetch(JSON_URL)
           titulo: entry.titulo,
           enlace: entry.enlace,
           enlace2: entry.enlace2,
-          imagen: entry.imagen
+          imagen: entry.imagen,
+          visto: entry.visto?.trim().toLowerCase() === 'true'
         });
       }
     });
@@ -63,7 +63,6 @@ function capituloFormateado(n) {
 
 function renderVistaPrincipalConOrden(temporadasList) {
   catalogo.innerHTML = '';
-
   let currentSerie = null;
   let contenedorTemporadas;
 
@@ -128,7 +127,7 @@ function renderCapitulos(clave, datos) {
   datos.capitulos.forEach(cap => {
     const a = document.createElement('a');
     a.className = 'capitulo';
-    a.href = cap.enlace;
+    if (cap.visto) a.classList.add('visto');
 
     const img = document.createElement('img');
     img.src = cap.imagen;
@@ -140,12 +139,21 @@ function renderCapitulos(clave, datos) {
     a.appendChild(img);
     a.appendChild(span);
 
+    if (cap.visto) {
+      const badge = document.createElement('div');
+      badge.className = 'visto-badge';
+      badge.textContent = '✔ Visto';
+      a.appendChild(badge);
+    }
+
     if (cap.enlace2 && cap.enlace2.trim() !== '') {
       a.href = '#';
       a.addEventListener('click', e => {
         e.preventDefault();
         mostrarOpcionesEnlaces(cap.enlace, cap.enlace2);
       });
+    } else {
+      a.href = cap.enlace;
     }
 
     capsDiv.appendChild(a);
@@ -155,7 +163,6 @@ function renderCapitulos(clave, datos) {
 }
 
 function mostrarOpcionesEnlaces(enlace1, enlace2) {
-  // Crear overlay
   const overlay = document.createElement('div');
   Object.assign(overlay.style, {
     position: 'fixed',
@@ -167,7 +174,6 @@ function mostrarOpcionesEnlaces(enlace1, enlace2) {
     zIndex: 9999,
   });
 
-  // Crear cuadro modal
   const modal = document.createElement('div');
   Object.assign(modal.style, {
     backgroundColor: '#121212',
@@ -179,7 +185,6 @@ function mostrarOpcionesEnlaces(enlace1, enlace2) {
     boxShadow: '0 8px 24px rgba(0,0,0,0.9)',
   });
 
-  // Texto pregunta
   const pregunta = document.createElement('p');
   pregunta.textContent = '¿Qué enlace quieres abrir?';
   Object.assign(pregunta.style, {
@@ -189,7 +194,6 @@ function mostrarOpcionesEnlaces(enlace1, enlace2) {
     fontWeight: '600',
   });
 
-  // Botón Enlace 1
   const btn1 = document.createElement('button');
   btn1.textContent = 'Enlace 1';
   Object.assign(btn1.style, {
@@ -209,7 +213,6 @@ function mostrarOpcionesEnlaces(enlace1, enlace2) {
     document.body.removeChild(overlay);
   });
 
-  // Botón Enlace 2 (naranja más suave)
   const btn2 = document.createElement('button');
   btn2.textContent = 'Enlace 2';
   Object.assign(btn2.style, {
@@ -228,7 +231,6 @@ function mostrarOpcionesEnlaces(enlace1, enlace2) {
     document.body.removeChild(overlay);
   });
 
-  // Botón cerrar
   const cerrarBtn = document.createElement('button');
   cerrarBtn.textContent = 'Cerrar';
   Object.assign(cerrarBtn.style, {
@@ -246,7 +248,6 @@ function mostrarOpcionesEnlaces(enlace1, enlace2) {
     document.body.removeChild(overlay);
   });
 
-  // Contenedor de botones enlaces (flex)
   const btnContainer = document.createElement('div');
   Object.assign(btnContainer.style, {
     display: 'flex',
@@ -265,7 +266,6 @@ function mostrarOpcionesEnlaces(enlace1, enlace2) {
   document.body.appendChild(overlay);
 }
 
-// Evento para volver a vista principal al hacer click en el logo o título
 document.querySelector('.logo-container').addEventListener('click', () => {
   sessionStorage.removeItem('ultimaVista');
   renderVistaPrincipalConOrden(temporadasList);
