@@ -74,6 +74,8 @@ body {
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  /* Animación entrada */
+  animation: fadeInUp 0.5s ease forwards;
 }
 
 .temporada img {
@@ -82,12 +84,13 @@ body {
   max-width: 200px;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
 .temporada:hover img {
   transform: scale(1.05);
   box-shadow: 0 12px 32px rgba(255, 75, 43, 0.3);
+  filter: brightness(1.1);
 }
 
 .temporada span {
@@ -109,75 +112,31 @@ body {
   padding-left: 12px;
 }
 
-/* Nuevo contenedor para capítulos en lista sin imágenes */
-.capitulos-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 600px;
-  margin-top: 20px;
-}
-
-/* Nuevo estilo para cada capítulo en lista */
-.capitulo-lista {
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  padding: 12px 16px;
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-}
-
-.capitulo-lista:hover {
-  background-color: #ff4b2b;
-  color: #121212;
-}
-
-/* Badge para capítulos vistos en lista, con ojo y más grande */
-.visto-badge-lista {
-  background-color: #2ecc71;
-  color: white;
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 12px;
-  font-weight: 700;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Mantengo los capítulos con imagen originales por si los usas en otro lado */
-
 .capitulos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 20px;
 }
 
+/* Estilo para capítulos con animación entrada */
 .capitulo {
   background-color: #1e1e1e;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
   text-decoration: none;
   color: white;
   display: flex;
   flex-direction: column;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   position: relative;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
 .capitulo:hover {
   transform: scale(1.05);
   box-shadow: 0 12px 32px rgba(255, 75, 43, 0.3);
+  filter: brightness(1.1);
   z-index: 2;
 }
 
@@ -201,37 +160,7 @@ body {
   outline-offset: 2px;
 }
 
-/* Badge para capítulos con imagen (original) */
-.visto-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: #2ecc71;
-  color: white;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 6px;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Estilos para capítulos marcados como "visto" */
-.capitulo.visto img {
-  filter: brightness(0.4);
-}
-
-.capitulo.visto span {
-  color: #bbb;
-  /* quitado line-through para solo perder color */
-  /* text-decoration: line-through; */
-  opacity: 0.6;
-}
-
-/* Botón volver */
+/* Botones con transición y efecto hover */
 .volver-btn {
   background-color: #ff4b2b;
   border: none;
@@ -242,12 +171,15 @@ body {
   margin-bottom: 20px;
   font-weight: 600;
   font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .volver-btn:hover {
   background-color: #e04324;
+  transform: scale(1.05);
 }
 
+/* Pie de página */
 .footer {
   text-align: center;
   padding: 30px 0;
@@ -280,6 +212,7 @@ body {
   color: white;
   font-weight: 600;
   user-select: none;
+  animation: modalShow 0.3s ease forwards;
 }
 
 .modal-content h3 {
@@ -304,12 +237,13 @@ body {
   border-radius: 8px;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   font-weight: 600;
 }
 
 .modal-btn:hover {
   background: #e04324;
+  transform: scale(1.05);
 }
 
 .modal-close {
@@ -325,4 +259,65 @@ body {
 
 .modal-close:hover {
   color: #ff4b2b;
+}
+
+/* ====== Estilos para capítulos marcados como "visto" ====== */
+
+.capitulo.visto img {
+  filter: brightness(0.3);
+}
+
+.capitulo.visto span {
+  color: #bbb;
+  /* Eliminado line-through para solo cambio de color */
+  /* text-decoration: line-through; */
+}
+
+/* Insignia "visto" con icono de ojo y tamaño aumentado */
+.visto-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #2ecc71;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* ====== Animaciones definidas ====== */
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalShow {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animación clic rápida para botones (opcional) */
+.clicked {
+  animation: clickBounce 0.3s ease forwards;
+}
+
+@keyframes clickBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
 }
