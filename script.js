@@ -1,4 +1,4 @@
-const JSON_URL = 'https://opensheet.elk.sh/1yz-JkWidUVkWjqYAcwDuqUHJ4knIudDgOl1Tyr5hMts/Hoja1';
+const JSON_URL = 'https://opensheet.elk.sh/1eE89x_vzmIfMHA3X6DxTizumaK5AjDOoi3Rg63IHGXk/Hoja1';
 
 const catalogo = document.getElementById('catalogo');
 
