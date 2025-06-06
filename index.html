@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Catálogo de Series</title>
-  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <meta name="theme-color" content="#121212" />
 </head>
 <body>
   <header class="header">
@@ -24,13 +22,18 @@
     <p>Esta web es para uso personal, no tiene fines comerciales ni de lucro.</p>
   </footer>
 
+  <!-- Modal para elegir enlace -->
+  <div id="modalEnlaces" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h3>Elige un enlace para abrir</h3>
+      <div class="modal-buttons">
+        <button id="btnEnlace1" class="modal-btn">Abrir Enlace 1</button>
+        <button id="btnEnlace2" class="modal-btn">Abrir Enlace 2</button>
+      </div>
+      <button id="btnCerrarModal" class="modal-close">Cerrar</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(reg => console.log('SW registrado', reg))
-        .catch(err => console.error('SW error', err));
-    }
-  </script>
 </body>
 </html>
